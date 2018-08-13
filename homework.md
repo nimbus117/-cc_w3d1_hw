@@ -37,7 +37,8 @@ SELECT name FROM people;
 3.  Oops! Someone at CodeClan spelled Graham's name wrong! Change it to reflect the proper spelling ('Graeme Broose' should be 'Graham Bruce').
 
 ```sql
-SELECT * from people WHERE name = 'Graham Broose';
+-- check the returned row first and then use id for update
+SELECT * from people WHERE name = 'Graeme Broose';
 UPDATE people SET name = 'Graham Bruce' WHERE id = 3;
 ```
 
@@ -56,6 +57,7 @@ SELECT name FROM people WHERE name = 'James';
 6.  The cinema is showing 'Batman Begins', but Batman is DC, not Marvel! Delete the entry from the 'movies' table.
 
 ```sql
+-- check the returned row first and then use id for delete
 SELECT * FROM movies WHERE title = 'Batman Begins';
 DELETE FROM movies WHERE id = 9;
 ```
@@ -69,6 +71,7 @@ INSERT INTO people (name) VALUES ('Keith Douglas');
 8.  Craig has decided to hijack our movie evening, Remove him from the table of people.
 
 ```sql
+-- check the returned row first and then use id for delete
 SELECT * FROM people WHERE name = 'Craig Morton';
 DELETE FROM people WHERE id = 16;
 ```
@@ -76,14 +79,15 @@ DELETE FROM people WHERE id = 16;
 9.  The cinema has just heard that they will be holding an exclusive midnight showing of 'Avengers: Infinity War'!! Create a new entry in the 'movies' table to reflect this.
 
 ```sql
+-- check the type for show_time (it's a VARCAHR), google is my friend
 SELECT column_name, data_type FROM information_schema.columns WHERE table_name = 'movies';
 INSERT INTO movies (title, year, show_time) VALUES ('Avengers: Infinity War', 2018, '00:00');
-SELECT * FROM movies WHERE title = 'Avengers: Infinity War';
 ```
 
 10.  The cinema would also like to make the Guardians movies a back to back feature. Find out the show time of "Guardians of the Galaxy" and set the show time of "Guardians of the Galaxy 2" to start two hours later.
 
 ```sql
+-- return the show_time for Guardians and then the id for Guardians 2 then update using id
 SELECT show_time FROM movies WHERE title = 'Guardians of the Galaxy';
 SELECT id FROM movies WHERE title = 'Guardians of the Galaxy 2';
 UPDATE movies SET show_time = '20:55' WHERE id = 16;
