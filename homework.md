@@ -79,7 +79,7 @@ DELETE FROM people WHERE id = 16;
 9.  The cinema has just heard that they will be holding an exclusive midnight showing of 'Avengers: Infinity War'!! Create a new entry in the 'movies' table to reflect this.
 
 ```sql
--- check the type for show_time (it's a VARCAHR), google is my friend
+-- check the type for show_time (it's a VARCHAR), google is my friend
 SELECT column_name, data_type FROM information_schema.columns WHERE table_name = 'movies';
 INSERT INTO movies (title, year, show_time) VALUES ('Avengers: Infinity War', 2018, '00:00');
 ```
