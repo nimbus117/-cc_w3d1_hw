@@ -38,8 +38,10 @@ SELECT name FROM people;
 
 ```sql
 -- check the returned row first and then use id for update
-SELECT * from people WHERE name = 'Graeme Broose';
-UPDATE people SET name = 'Graham Bruce' WHERE id = 3;
+-- SELECT * from people WHERE name = 'Graeme Broose';
+-- UPDATE people SET name = 'Graham Bruce' WHERE id = 3;
+-- nested query
+UPDATE people SET name = 'Graham Bruce' WHERE id = (SELECT id from people WHERE name = 'Graeme Broose');
 ```
 
 4. Insert your name into the 'people' table.
@@ -60,6 +62,7 @@ SELECT name FROM people WHERE name = 'James';
 -- check the returned row first and then use id for delete
 SELECT * FROM movies WHERE title = 'Batman Begins';
 DELETE FROM movies WHERE id = 9;
+
 ```
 
 7.  Create a new entry in the 'people' table with the name of one of the instructors.
@@ -110,4 +113,8 @@ DELETE FROM movies WHERE title NOT LIKE 'Guard%';
 DELETE FROM movies WHERE year < 2017;
 -- all movies with a title ending in a number
 DELETE FROM movies WHERE title ~ '[1-9]$';
+-- all in range
+DELETE FROM movies WHERE id IN (SELECT id WHERE title ~ '[1-9]$');
+-- between range
+DELETE FROM people WHERE id BETWEEN 1 AND 10;
 ```
